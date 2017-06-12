@@ -4,28 +4,26 @@ ctx = canvas.getContext('2d');
 var WIDTH = canvas.width / 8;
 var HEIGHT = canvas.height / 8;
 
-circradius = 8;
+circradius = 6;
 canvas.width += circradius*2 + 4; // for black circle
 
 var fenBox = document.getElementById("fen");
 
-
-
 var dict = {};
 
-dict['b'] = document.getElementById("bb");
-dict['k'] = document.getElementById("bk");
-dict['n'] = document.getElementById("bn");
-dict['p'] = document.getElementById("bp");
-dict['q'] = document.getElementById("bq");
-dict['r'] = document.getElementById("br");
+dict.b = document.getElementById("bb");
+dict.k = document.getElementById("bk");
+dict.n = document.getElementById("bn");
+dict.p = document.getElementById("bp");
+dict.q = document.getElementById("bq");
+dict.r = document.getElementById("br");
 
-dict['B'] = document.getElementById("wb");
-dict['K'] = document.getElementById("wk");
-dict['N'] = document.getElementById("wn");
-dict['P'] = document.getElementById("wp");
-dict['Q'] = document.getElementById("wq");
-dict['R'] = document.getElementById("wr");
+dict.B = document.getElementById("wb");
+dict.K = document.getElementById("wk");
+dict.N = document.getElementById("wn");
+dict.P = document.getElementById("wp");
+dict.Q = document.getElementById("wq");
+dict.R = document.getElementById("wr");
 
 function isLetter(c) {
   return c.toLowerCase() != c.toUpperCase();
