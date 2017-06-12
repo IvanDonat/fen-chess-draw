@@ -1,10 +1,15 @@
 var canvas = document.getElementById("canvas");
 ctx = canvas.getContext('2d');
 
-var fenBox = document.getElementById("fen");
-
 var WIDTH = canvas.width / 8;
 var HEIGHT = canvas.height / 8;
+
+circradius = 8;
+canvas.width += circradius*2 + 4; // for black circle
+
+var fenBox = document.getElementById("fen");
+
+
 
 var dict = {};
 
@@ -43,7 +48,7 @@ function redraw() {
         ctx.lineTo(WIDTH*8, i*HEIGHT);
         ctx.stroke();
     }
-    for(var i = 0; i < 8; i++) {
+    for(var i = 0; i < 8 + 1; i++) {
         ctx.beginPath();
         ctx.moveTo(i*WIDTH, 0);
         ctx.lineTo(i*WIDTH, HEIGHT*8);
@@ -71,13 +76,15 @@ function redraw() {
     color = text.split(" ")[1];
     if(isLetter(color)) {
         if(color.toLowerCase() == 'w') {
-            ctx.fillStyle = "#FFFFFF";
-            ctx.fillRect(8*WIDTH - WIDTH/4, 8*HEIGHT - HEIGHT/4, WIDTH/4, HEIGHT/4);
+            ctx.clearRect(8*WIDTH, 8*HEIGHT, ctx.width - 8*WIDTH, ctx.height);
         }
         else
         {
             ctx.fillStyle = "#000000";
-            ctx.fillRect(8*WIDTH - WIDTH/4, 0, WIDTH/4, HEIGHT/4);
+            
+            ctx.beginPath();
+            ctx.arc(8*WIDTH + circradius + 2, circradius + 2, circradius, 0, 2 * Math.PI, false);
+            ctx.fill();
         }
     }
 }
