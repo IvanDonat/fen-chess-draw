@@ -11,19 +11,12 @@ var fenBox = document.getElementById("fen");
 
 var dict = {};
 
-dict.b = document.getElementById("bb");
-dict.k = document.getElementById("bk");
-dict.n = document.getElementById("bn");
-dict.p = document.getElementById("bp");
-dict.q = document.getElementById("bq");
-dict.r = document.getElementById("br");
-
-dict.B = document.getElementById("wb");
-dict.K = document.getElementById("wk");
-dict.N = document.getElementById("wn");
-dict.P = document.getElementById("wp");
-dict.Q = document.getElementById("wq");
-dict.R = document.getElementById("wr");
+pcs = ['b', 'k', 'n', 'p', 'q', 'r']
+for(var i = 0; i < pcs.length; i++) {
+    pce = pcs[i];
+    dict[pce.toUpperCase()] = document.getElementById("w" + pce);
+    dict[pce.toLowerCase()] = document.getElementById("b" + pce);
+}
 
 function isLetter(c) {
   return c.toLowerCase() != c.toUpperCase();
