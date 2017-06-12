@@ -3,6 +3,9 @@ ctx = canvas.getContext('2d');
 
 var fenBox = document.getElementById("fen");
 
+var WIDTH = canvas.width / 8;
+var HEIGHT = canvas.height / 8;
+
 var dict = {};
 
 dict['b'] = document.getElementById("bb");
@@ -24,18 +27,26 @@ function isLetter(c) {
 }
 
 function redraw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#BBBBBB";
+    for(var i = 0; i < 8; i++) {
+        for(var j = 0; j < 8; j++) {
+            if((i + j) % 2 == 0)
+                ctx.fillRect(i*WIDTH, j*HEIGHT, WIDTH, HEIGHT);
+        }
+    }
     
     for(var i = 0; i < 8; i++) {
         ctx.beginPath();
-        ctx.moveTo(0, i*60);
-        ctx.lineTo(600, i*60);
+        ctx.moveTo(0, i*HEIGHT);
+        ctx.lineTo(WIDTH*8, i*HEIGHT);
         ctx.stroke();
     }
     for(var i = 0; i < 8; i++) {
         ctx.beginPath();
-        ctx.moveTo(i*60, 0);
-        ctx.lineTo(i*60, 600);
+        ctx.moveTo(i*WIDTH, 0);
+        ctx.lineTo(i*WIDTH, HEIGHT*8);
         ctx.stroke();
     }
     
@@ -50,12 +61,25 @@ function redraw() {
         for(var l = 0; l < fen[i].length; l++) {
             chr = fen[i][l];
             
-            if(isLetter(chr)) {
-                ctx.drawImage(dict[chr], col*60, i*60);
-            }
-            else
-                col += chr - 1;
+            if(isLetter(chr)) ctx.drawImage(dict[chr], col*WIDTH, i*HEIGHT, WIDTH, HEIGHT);
+            else col += chr - 1;
+            
             col += 1;
         }
     }
+    
+    color = text.split(" ")[1];
+    if(isLetter(color)) {
+        if(color.toLowerCase() == 'w') {
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(8*WIDTH - WIDTH/4, 8*HEIGHT - HEIGHT/4, WIDTH/4, HEIGHT/4);
+        }
+        else
+        {
+            ctx.fillStyle = "#000000";
+            ctx.fillRect(8*WIDTH - WIDTH/4, 0, WIDTH/4, HEIGHT/4);
+        }
+    }
 }
+
+redraw();
